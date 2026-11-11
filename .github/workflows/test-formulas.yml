@@ -1,0 +1,45 @@
+name: Test formulas
+
+# Every pull request that changes a formula (VD-683): audit it, install it from this branch, and run its test (which
+# checks `gliss version` reports the formula's version), on macOS (Apple Silicon) and Linux (x64).
+on:
+  pull_request:
+    paths: ["Formula/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # 5.0.0
+        with:
+          persist-credentials: false
+      - name: Homebrew on Linux
+        if: runner.os == 'Linux'
+        run: echo "/home/linuxbrew/.linuxbrew/bin" >> "$GITHUB_PATH"
+      - name: Audit, install and test each formula
+        env:
+          HOMEBREW_NO_AUTO_UPDATE: "1"
+          HOMEBREW_NO_INSTALL_FROM_API: "1"
+        run: |
+          set -euo pipefail
+          tap="$(brew --repository)/Library/Taps/incredibuild-rnd/homebrew-gliss"
+          mkdir -p "$(dirname "$tap")"
+          ln -s "$GITHUB_WORKSPACE" "$tap"
+          for f in Formula/*.rb; do
+            name="incredibuild-rnd/gliss/$(basename "$f" .rb)"
+            echo "::group::$name"
+            brew audit --formula --online "$name"
+            brew install "$name"
+            brew test "$name"
+            brew uninstall "$name"
+            echo "::endgroup::"
+          done
