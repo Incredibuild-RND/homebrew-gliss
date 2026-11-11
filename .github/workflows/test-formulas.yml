@@ -4,7 +4,7 @@ name: Test formulas
 # checks `gliss version` reports the formula's version), on macOS (Apple Silicon) and Linux (x64).
 on:
   pull_request:
-    paths: ["Formula/**"]
+    paths: ["Formula/**", ".github/workflows/test-formulas.yml"]
   workflow_dispatch:
 
 permissions:
