@@ -4,30 +4,30 @@
 class GlissPreprod < Formula
   desc "Gliss builder client: sign in, release, status, diagnose and the MCP server (preprod channel)"
   homepage "https://glissando.dev"
-  version "0.1.8"
+  version "0.1.10"
   license :cannot_represent
 
   conflicts_with "gliss", because: "both install the gliss command"
 
   on_macos do
     on_arm do
-      url "https://get.glissando.dev/preprod/cli/0.1.8/gliss_0.1.8_darwin_arm64.tar.gz"
-      sha256 "217d6fc5e02b2367c6438ad114d33090803290d1aa7916a965681e7e99970f83"
+      url "https://get.glissando.dev/preprod/cli/0.1.10/gliss_0.1.10_darwin_arm64.tar.gz"
+      sha256 "cf0b66a9462d155d05b594b36a4ed283e8b970e8eccba1d0902d37936018ba18"
     end
     on_intel do
-      url "https://get.glissando.dev/preprod/cli/0.1.8/gliss_0.1.8_darwin_amd64.tar.gz"
-      sha256 "3ed3cfe7978e1521fb8c7edda234e4afd19bf70af8a15f43cf36f5d2fbd74a66"
+      url "https://get.glissando.dev/preprod/cli/0.1.10/gliss_0.1.10_darwin_amd64.tar.gz"
+      sha256 "7afb73d8d94199787d4bbf0a239c937c7174da5ca2dccb9355138765a90cee0b"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://get.glissando.dev/preprod/cli/0.1.8/gliss_0.1.8_linux_arm64.tar.gz"
-      sha256 "fcc4de8b232573ec576a75d6be484e007b8635bee56c617ffa6e833448dbfec3"
+      url "https://get.glissando.dev/preprod/cli/0.1.10/gliss_0.1.10_linux_arm64.tar.gz"
+      sha256 "9165c1c88477d06f500dc2e1eeea0f7177197920e82e966964beae9afc1e7963"
     end
     on_intel do
-      url "https://get.glissando.dev/preprod/cli/0.1.8/gliss_0.1.8_linux_amd64.tar.gz"
-      sha256 "bd826c3c0c9ea6f572a13fbe0e0ec3289e3984f5b5a029d4db012570187710b1"
+      url "https://get.glissando.dev/preprod/cli/0.1.10/gliss_0.1.10_linux_amd64.tar.gz"
+      sha256 "f07a282fef759558a023123c8147437699877fb1536532c4e34043e074981632"
     end
   end
 
